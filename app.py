@@ -525,7 +525,7 @@ def page_single(model, scaler):
         st.markdown('<div class="section-card" style="margin-top:1.4rem;">'
                     '<div class="section-title">📊 Probabilitas Seluruh Kelas</div>',
                     unsafe_allow_html=True)
-        st.plotly_chart(single_prob_chart(proba), use_container_width=True)
+        st.plotly_chart(single_prob_chart(proba), width='stretch')
 
         rows = ""
         for i in range(5):
@@ -687,14 +687,14 @@ def page_bulk(model, scaler):
         st.markdown('<div class="section-card">'
                     '<div class="section-title">📋 Preview Hasil (10 Data Pertama)</div>',
                     unsafe_allow_html=True)
-        st.dataframe(hasil_df.head(10), use_container_width=True, hide_index=True)
+        st.dataframe(hasil_df.head(10), width='stretch', hide_index=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
         # ── Distribusi chart ──
         st.markdown('<div class="section-card">'
                     '<div class="section-title">📊 Distribusi Kategori IQ</div>',
                     unsafe_allow_html=True)
-        st.plotly_chart(bulk_dist_chart(hasil_df), use_container_width=True)
+        st.plotly_chart(bulk_dist_chart(hasil_df), width='stretch')
         st.markdown("</div>", unsafe_allow_html=True)
 
         # ── Download hasil ──
