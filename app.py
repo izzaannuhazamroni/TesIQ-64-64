@@ -76,11 +76,11 @@ IQ_RANGES = {
 }
 
 IQ_COLORS = {
-    0: "#EF4444",
-    1: "#F97316",
-    2: "#EAB308",
-    3: "#22C55E",
-    4: "#4F46E5",
+    0: "#DC2626",  # Red - Moderate Intellectual Disability
+    1: "#F97316",  # Orange - Mild Intellectual Disability
+    2: "#EAB308",  # Yellow - Below Average
+    3: "#22C55E",  # Green - Average
+    4: "#3B82F6",  # Blue - Above Average
 }
 
 # ══════════════════════════════════════════════════════════════
@@ -88,189 +88,434 @@ IQ_COLORS = {
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-html, body, [class*="css"] { font-family: 'Sora', sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, [class*="css"] { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 
-.stApp { background: #F4F6FB; }
+.stApp {
+    background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+    color: #1E293B;
+}
 
 #MainMenu, footer, header { visibility: hidden; }
-.block-container { padding-top: 1.8rem; padding-bottom: 3rem; }
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 900px;
+}
 
-/* ── header ── */
+/* ── Main header ── */
 .rapiq-header {
-    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 60%, #818CF8 100%);
-    border-radius: 20px;
-    padding: 2.4rem 2rem 2rem;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
     text-align: center;
-    margin-bottom: 1.6rem;
-    box-shadow: 0 8px 32px rgba(79,70,229,0.22);
-}
-.rapiq-header .logo { font-size: 3rem; line-height: 1; margin-bottom: .4rem; }
-.rapiq-header h1 {
-    color: #fff; font-size: 2rem; font-weight: 700;
-    letter-spacing: -.5px; margin: 0 0 .3rem;
-}
-.rapiq-header p {
-    color: rgba(255,255,255,.82); font-size: .85rem;
-    font-weight: 300; line-height: 1.5; margin: 0;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15),
+                0 0 1px rgba(15, 23, 42, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ── tabs ── */
+.rapiq-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08), transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.08), transparent 50%);
+    pointer-events: none;
+}
+
+.rapiq-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.rapiq-header .logo {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: .8rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.rapiq-header h1 {
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin-bottom: .8rem;
+    background: linear-gradient(135deg, #fff 0%, #E2E8F0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.rapiq-header p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ── Tabs styling ── */
 .stTabs [data-baseweb="tab-list"] {
     background: #fff;
-    border-radius: 14px;
-    padding: .35rem .4rem;
-    gap: .3rem;
-    box-shadow: 0 2px 10px rgba(79,70,229,.08);
-    border: 1px solid #E8EAFF;
-    margin-bottom: 1.4rem;
+    border-radius: 16px;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    border: 1px solid #E2E8F0;
+    margin-bottom: 2rem;
 }
+
 .stTabs [data-baseweb="tab"] {
-    border-radius: 10px;
-    padding: .55rem 1.3rem;
-    font-size: .85rem;
+    border-radius: 12px;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    color: #6B7280;
+    color: #64748B;
     border: none;
     background: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: #F1F5F9;
+    color: #334155;
+}
+
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(90deg,#4F46E5,#6366F1) !important;
+    background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%) !important;
     color: #fff !important;
     font-weight: 600;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
-/* ── section card ── */
+/* ── Section cards ── */
 .section-card {
     background: #fff;
-    border-radius: 16px;
-    padding: 1.6rem 1.8rem;
-    margin-bottom: 1.4rem;
-    box-shadow: 0 2px 12px rgba(79,70,229,.07);
-    border: 1px solid #E8EAFF;
-}
-.section-title {
-    font-size: .7rem; font-weight: 600;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    color: #4F46E5; margin-bottom: 1rem;
+    border-radius: 18px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
 }
 
-/* ── buttons ── */
+.section-card:hover {
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    border-color: #CBD5E1;
+}
+
+.section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3B82F6;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* ── Primary button ── */
 .stButton > button {
     width: 100%;
-    background: linear-gradient(90deg,#4F46E5,#6366F1);
-    color: #fff; font-family: 'Sora',sans-serif;
-    font-size: .95rem; font-weight: 600;
-    border: none; border-radius: 12px;
-    padding: .9rem 1.5rem; cursor: pointer;
-    letter-spacing: .3px;
-    box-shadow: 0 4px 16px rgba(79,70,229,.30);
-    transition: opacity .2s;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.stButton > button:hover { opacity: .88; }
 
-/* ── download button ── */
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+}
+
+.stButton > button:active {
+    transform: translateY(0);
+}
+
+/* ── Download button ── */
 .stDownloadButton > button {
     width: 100%;
     background: #fff;
-    color: #4F46E5; font-family: 'Sora',sans-serif;
-    font-size: .88rem; font-weight: 600;
-    border: 2px solid #4F46E5; border-radius: 12px;
-    padding: .7rem 1.2rem; cursor: pointer;
-    transition: all .2s;
-}
-.stDownloadButton > button:hover {
-    background: #4F46E5; color: #fff;
+    color: #3B82F6;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 2px solid #3B82F6;
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── result card ── */
+.stDownloadButton > button:hover {
+    background: #3B82F6;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ── Result card ── */
 .result-card {
-    border-radius: 16px; padding: 1.8rem 2rem;
-    margin-top: 1.4rem; text-align: center;
+    border-radius: 20px;
+    padding: 2.4rem 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border: none;
 }
+
 .result-label {
-    font-size: .68rem; font-weight: 600;
-    letter-spacing: 1.6px; text-transform: uppercase;
-    opacity: .7; margin-bottom: .3rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.6rem;
 }
+
 .result-category {
-    font-size: 1.45rem; font-weight: 700;
-    margin-bottom: .15rem; letter-spacing: -.3px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.5px;
 }
+
 .result-range {
-    font-size: .85rem; font-weight: 400;
-    margin-bottom: 1rem; opacity: .75;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
 }
+
 .result-confidence {
     display: inline-block;
-    background: rgba(255,255,255,.35);
-    border-radius: 50px; padding: .35rem 1.1rem;
-    font-size: .82rem; font-weight: 600; letter-spacing: .3px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    backdrop-filter: blur(10px);
 }
 
-/* ── stat cards ── */
-.stat-grid { display: flex; gap: .9rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+/* ── Stat cards ── */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
 .stat-card {
-    flex: 1; min-width: 120px;
-    background: #fff; border-radius: 14px;
-    padding: 1rem 1.1rem;
-    box-shadow: 0 2px 10px rgba(79,70,229,.07);
-    border: 1px solid #E8EAFF; text-align: center;
+    background: linear-gradient(135deg, #fff 0%, #F8FAFC 100%);
+    border-radius: 16px;
+    padding: 1.5rem 1.2rem;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+    border: 1px solid #E2E8F0;
+    text-align: center;
+    transition: all 0.3s ease;
 }
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+    border-color: #BFDBFE;
+}
+
 .stat-card .stat-val {
-    font-size: 1.6rem; font-weight: 700; color: #4F46E5; line-height: 1.1;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #3B82F6;
+    line-height: 1.1;
 }
+
 .stat-card .stat-key {
-    font-size: .72rem; color: #6B7280; font-weight: 500;
-    margin-top: .2rem; letter-spacing: .3px;
+    font-size: 0.75rem;
+    color: #64748B;
+    font-weight: 600;
+    margin-top: 0.6rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* ── prob table ── */
-.prob-table { width:100%; border-collapse:collapse; font-size:.82rem; margin-top:.5rem; }
+/* ── Probability table ── */
+.prob-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
 .prob-table th {
-    text-align:left; color:#6B7280; font-weight:500;
-    padding:.45rem .6rem; border-bottom:1px solid #E5E7EB;
+    text-align: left;
+    color: #475569;
+    font-weight: 600;
+    padding: 0.8rem 0.8rem;
+    border-bottom: 2px solid #E2E8F0;
+    background: #F8FAFC;
 }
-.prob-table td { padding:.45rem .6rem; border-bottom:1px solid #F3F4F6; color:#374151; }
-.prob-table tr:last-child td { border-bottom:none; }
+
+.prob-table td {
+    padding: 0.8rem 0.8rem;
+    border-bottom: 1px solid #F1F5F9;
+    color: #334155;
+}
+
+.prob-table tr:hover {
+    background: #F8FAFC;
+}
+
+.prob-table tr:last-child td {
+    border-bottom: none;
+}
+
 .prob-bar-wrap {
-    background:#E8EAFF; border-radius:6px; height:8px;
-    width:120px; display:inline-block; vertical-align:middle; margin-right:6px;
+    background: #E0E7FF;
+    border-radius: 8px;
+    height: 10px;
+    width: 140px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    overflow: hidden;
 }
-.prob-bar-fill { border-radius:6px; height:8px; display:inline-block; }
 
-/* ── template info box ── */
+.prob-bar-fill {
+    border-radius: 8px;
+    height: 10px;
+    display: inline-block;
+    background: linear-gradient(90deg, #3B82F6, #6366F1);
+}
+
+/* ── Info box ── */
 .info-box {
-    background: #EEF2FF; border: 1px solid #C7D2FE;
-    border-radius: 12px; padding: 1rem 1.2rem;
-    font-size: .84rem; color: #3730A3; margin-bottom: 1rem;
+    background: linear-gradient(135deg, #EFF6FF 0%, #F0F9FF 100%);
+    border: 1.5px solid #BFDBFE;
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    font-size: 0.88rem;
+    color: #0C4A6E;
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
 }
+
 .info-box code {
-    background: #C7D2FE; border-radius: 4px;
-    padding: .1rem .35rem; font-family: 'DM Mono', monospace;
-    font-size: .8rem;
+    background: #3B82F6;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-/* ── error box ── */
+/* ── Error box ── */
 .err-box {
-    background:#FEF2F2; border:1px solid #FECACA;
-    border-radius:12px; padding:1rem 1.2rem;
-    color:#B91C1C; font-size:.85rem; margin-bottom:.8rem;
+    background: linear-gradient(135deg, #FEE2E2 0%, #FFEBEE 100%);
+    border: 1.5px solid #FECACA;
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    color: #7F1D1D;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
 }
 
-/* ── success box ── */
+/* ── Success box ── */
 .ok-box {
-    background:#F0FDF4; border:1px solid #BBF7D0;
-    border-radius:12px; padding:1rem 1.2rem;
-    color:#166534; font-size:.85rem; margin-bottom:.8rem;
+    background: linear-gradient(135deg, #F0FDF4 0%, #F7FEE7 100%);
+    border: 1.5px solid #BBF7D0;
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    color: #166534;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
 }
 
-/* ── file uploader ── */
+/* ── File uploader ── */
 [data-testid="stFileUploader"] {
-    border: 2px dashed #C7D2FE !important;
-    border-radius: 14px !important;
-    background: #F8F9FF !important;
+    border: 2px dashed #BFDBFE !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #F0F9FF 0%, #F0F9FF 100%) !important;
+    padding: 2rem !important;
+}
+
+/* ── Input styling ── */
+.stNumberInput input, .stSelectbox select {
+    border-radius: 10px !important;
+    border: 1.5px solid #E2E8F0 !important;
+    padding: 0.7rem 1rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+}
+
+.stNumberInput input:focus, .stSelectbox select:focus {
+    border-color: #3B82F6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .rapiq-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .rapiq-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .prob-table {
+        font-size: 0.75rem;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -715,10 +960,12 @@ def main():
     # header
     st.markdown("""
     <div class="rapiq-header">
-        <div class="logo">🧠</div>
-        <h1>RapIQ</h1>
-        <p>Sistem Prediksi Kategori IQ Berbasis Artificial Intelligence<br>
-        Menggunakan Multilayer Perceptron (MLP)</p>
+        <div class="rapiq-header-content">
+            <div class="logo">🧠</div>
+            <h1>RapIQ</h1>
+            <p>Sistem Prediksi Kategori IQ Berbasis Artificial Intelligence<br>
+            Menggunakan Multilayer Perceptron (MLP)</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
