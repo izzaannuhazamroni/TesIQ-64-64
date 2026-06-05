@@ -76,11 +76,11 @@ IQ_RANGES = {
 }
 
 IQ_COLORS = {
-    0: "#DC2626",  # Red - Moderate Intellectual Disability
-    1: "#F97316",  # Orange - Mild Intellectual Disability
-    2: "#EAB308",  # Yellow - Below Average
-    3: "#22C55E",  # Green - Average
-    4: "#3B82F6",  # Blue - Above Average
+    0: "#EF4444",
+    1: "#F97316",
+    2: "#EAB308",
+    3: "#22C55E",
+    4: "#4F46E5",
 }
 
 # ══════════════════════════════════════════════════════════════
@@ -88,490 +88,210 @@ IQ_COLORS = {
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 
-:root {
-    --bg: #F8FAFC;
-    --text: #1E293B;
-    --muted: #64748B;
-    --card: #ffffff;
-    --border: #E2E8F0;
-    --primary: #3B82F6;
-    --accent: #2563EB;
-    --primary-soft: #EFF6FF;
-    --header-start: #0F172A;
-    --header-end: #334155;
-    --info-bg: #EFF6FF;
-    --info-border: #BFDBFE;
-    --info-text: #0C4A6E;
-    --error-bg: #FEE2E2;
-    --error-border: #FECACA;
-    --error-text: #7F1D1D;
-    --success-bg: #F0FDF4;
-    --success-border: #BBF7D0;
-    --success-text: #166534;
-    --shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
-    --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.15);
-    --button-bg: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    --button-text: #fff;
-    --uploader-border: #BFDBFE;
-    --uploader-bg: #F0F9FF;
-}
+html, body, [class*="css"] { font-family: 'Sora', sans-serif; }
 
-[data-theme="dark"] {
-    --bg: #020617;
-    --text: #E2E8F0;
-    --muted: #94A3B8;
-    --card: #0F172A;
-    --border: #334155;
-    --primary: #60A5FA;
-    --accent: #3B82F6;
-    --primary-soft: #0F172A;
-    --header-start: #111827;
-    --header-end: #1E293B;
-    --info-bg: #0F172A;
-    --info-border: #334155;
-    --info-text: #E0F2FE;
-    --error-bg: rgba(248, 113, 113, 0.14);
-    --error-border: #FCA5A5;
-    --error-text: #F8B4B4;
-    --success-bg: #164E63;
-    --success-border: #0EA5E9;
-    --success-text: #BAE6FD;
-    --shadow: 0 2px 20px rgba(15, 23, 42, 0.5);
-    --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.45);
-    --button-bg: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-    --button-text: #fff;
-    --uploader-border: #475569;
-    --uploader-bg: #0F172A;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body, [class*="css"] { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); }
-
-.stApp {
-    background: var(--bg);
-    color: var(--text);
-}
+.stApp { background: #F3F5FF; }
 
 #MainMenu, footer, header { visibility: hidden; }
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    max-width: 900px;
+.block-container { padding-top: 2rem; padding-bottom: 3rem; }
+
+/* ── header ── */
+.rapiq-header {
+    background: linear-gradient(135deg, #312E81 0%, #4338CA 55%, #6366F1 100%);
+    border-radius: 24px;
+    padding: 2.5rem 2rem 2.3rem;
+    text-align: center;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 18px 45px rgba(49,46,129,0.18);
+}
+.rapiq-header .logo { font-size: 3.2rem; line-height: 1; margin-bottom: .5rem; }
+.rapiq-header h1 {
+    color: #fff; font-size: 2.4rem; font-weight: 800;
+    letter-spacing: -.7px; margin: 0 0 .35rem;
+}
+.rapiq-header p {
+    color: rgba(255,255,255,.88); font-size: .95rem;
+    font-weight: 400; line-height: 1.7; margin: 0 auto; max-width: 680px;
 }
 
-/* ── Main header ── */
-.rapiq-header {
-    background: linear-gradient(135deg, var(--header-start) 0%, var(--header-end) 50%, #334155 100%);
-    border-radius: 24px;
-    padding: 3rem 2.5rem;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15),
-                0 0 1px rgba(15, 23, 42, 0.1);
-    border: 1px solid rgba(148, 163, 184, 0.1);
+.subheader {
+    color: #4B5563; font-size: .95rem; line-height: 1.8;
+    margin-bottom: 1.8rem; max-width: 760px;
+    text-align: center; margin-left: auto; margin-right: auto;
+}
+
+/* ── section card ── */
+.section-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.6rem;
+    border: 1px solid rgba(99,102,241,0.12);
+    box-shadow: 0 14px 32px rgba(99,102,241,0.08);
     position: relative;
     overflow: hidden;
 }
-
-.rapiq-header::before {
+.section-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08), transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.08), transparent 50%);
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, #4F46E5, #6366F1);
+}
+.section-title {
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: 1.7px; text-transform: uppercase;
+    color: #4338CA; margin-bottom: 1rem;
 }
 
-.rapiq-header-content {
-    position: relative;
-    z-index: 1;
+.section-note {
+    color: #6B7280; font-size: .88rem; line-height: 1.7;
+    margin-bottom: 1.3rem;
 }
 
-.rapiq-header .logo {
-    font-size: 4rem;
-    line-height: 1;
-    margin-bottom: .8rem;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-.rapiq-header h1 {
-    color: #fff;
-    font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: -0.8px;
-    margin-bottom: .8rem;
-    background: linear-gradient(135deg, #fff 0%, #E2E8F0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.rapiq-header p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* ── Tabs styling ── */
+/* ── tabs ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 0.5rem;
-    gap: 0.5rem;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
-    border: 1px solid var(--border);
-    margin-bottom: 2rem;
+    background: #eef2ff;
+    border-radius: 18px;
+    padding: .35rem .4rem;
+    gap: .35rem;
+    box-shadow: none;
+    border: 1px solid rgba(99,102,241,0.18);
+    margin-bottom: 1.5rem;
 }
-
 .stTabs [data-baseweb="tab"] {
-    border-radius: 12px;
-    padding: 0.7rem 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #64748B;
+    border-radius: 14px;
+    padding: .65rem 1.3rem;
+    font-size: .9rem;
+    font-weight: 600;
+    color: #4B5563;
     border: none;
     background: transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.stTabs [data-baseweb="tab"]:hover {
-    background: var(--primary-soft);
-    color: var(--text);
-}
-
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%) !important;
+    background: linear-gradient(90deg,#4F46E5,#6366F1) !important;
     color: #fff !important;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
-/* ── Section cards ── */
-.section-card {
-    background: var(--card);
-    border-radius: 18px;
-    padding: 1.8rem 2rem;
-    margin-bottom: 1.8rem;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-}
-
-.section-card:hover {
-    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
-    border-color: #CBD5E1;
-}
-
-.section-title {
-    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--primary);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
 }
 
-/* ── Primary button ── */
+/* ── buttons ── */
 .stButton > button {
     width: 100%;
-    background: var(--button-bg);
-    color: var(--button-text);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(90deg,#4338CA,#6366F1);
+    color: #ffffff; font-family: 'Sora',sans-serif;
+    font-size: .96rem; font-weight: 700;
+    border: none; border-radius: 14px;
+    padding: 1rem 1.4rem; cursor: pointer;
+    letter-spacing: .3px;
+    box-shadow: 0 8px 24px rgba(67,56,202,.22);
+    transition: transform .2s ease, opacity .2s ease;
 }
+.stButton > button:hover { opacity: .94; transform: translateY(-1px); }
 
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
-}
-
-.stButton > button:active {
-    transform: translateY(0);
-}
-
-/* ── Download button ── */
+/* ── download button ── */
 .stDownloadButton > button {
     width: 100%;
-    background: var(--card);
-    color: var(--primary);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    padding: 0.85rem 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    color: #4338CA; font-family: 'Sora',sans-serif;
+    font-size: .9rem; font-weight: 700;
+    border: 2px solid #4338CA; border-radius: 14px;
+    padding: .85rem 1.2rem; cursor: pointer;
+    transition: all .2s ease;
 }
-
 .stDownloadButton > button:hover {
-    background: var(--primary);
-    color: var(--button-text);
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-    transform: translateY(-2px);
+    background: #4338CA; color: #fff;
 }
 
-/* ── Result card ── */
+/* ── result card ── */
 .result-card {
-    border-radius: 20px;
-    padding: 2.4rem 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    border: none;
+    border-radius: 18px; padding: 2rem 2.2rem;
+    margin-top: 1.6rem; text-align: center;
 }
-
 .result-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 0.6rem;
+    font-size: .75rem; font-weight: 700;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    opacity: .9; margin-bottom: .45rem;
 }
-
 .result-category {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 0.4rem;
-    letter-spacing: -0.5px;
+    font-size: 1.7rem; font-weight: 800;
+    margin-bottom: .25rem; letter-spacing: -.4px;
 }
-
 .result-range {
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin-bottom: 1.2rem;
-    opacity: 0.9;
+    font-size: .95rem; font-weight: 500;
+    margin-bottom: 1rem; opacity: .85;
 }
-
 .result-confidence {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 50px;
-    padding: 0.5rem 1.4rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,.28);
+    border-radius: 999px; padding: .45rem 1.2rem;
+    font-size: .9rem; font-weight: 700; letter-spacing: .25px;
 }
 
-/* ── Stat cards ── */
-.stat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.2rem;
-    margin-bottom: 2rem;
-}
-
+/* ── stat cards ── */
+.stat-grid { display: flex; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
 .stat-card {
-    background: linear-gradient(135deg, var(--card) 0%, var(--primary-soft) 100%);
-    border-radius: 16px;
-    padding: 1.5rem 1.2rem;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    text-align: center;
-    transition: all 0.3s ease;
+    flex: 1; min-width: 130px;
+    background: #ffffff; border-radius: 18px;
+    padding: 1.15rem 1.2rem;
+    box-shadow: 0 14px 30px rgba(67,56,202,.08);
+    border: 1px solid rgba(99,102,241,.16); text-align: center;
 }
-
-.stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
-    border-color: #BFDBFE;
-}
-
 .stat-card .stat-val {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #3B82F6;
-    line-height: 1.1;
+    font-size: 1.7rem; font-weight: 800; color: #312E81; line-height: 1.05;
 }
-
 .stat-card .stat-key {
-    font-size: 0.75rem;
-    color: #64748B;
-    font-weight: 600;
-    margin-top: 0.6rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: .75rem; color: #6B7280; font-weight: 600;
+    margin-top: .35rem; letter-spacing: .25px;
 }
 
-/* ── Probability table ── */
-.prob-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-    margin-top: 1rem;
-}
-
+/* ── prob table ── */
+.prob-table { width:100%; border-collapse:collapse; font-size:.86rem; margin-top:.75rem; }
 .prob-table th {
-    text-align: left;
-    color: var(--muted);
-    font-weight: 600;
-    padding: 0.8rem 0.8rem;
-    border-bottom: 2px solid var(--border);
-    background: var(--primary-soft);
+    text-align:left; color:#4B5563; font-weight:700;
+    padding:.65rem .7rem; border-bottom:1px solid #E5E7EB;
 }
-
-.prob-table td {
-    padding: 0.8rem 0.8rem;
-    border-bottom: 1px solid var(--surface-bg);
-    color: var(--text);
-}
-
-.prob-table tr:hover {
-    background: var(--primary-soft);
-}
-
-.prob-table tr:last-child td {
-    border-bottom: none;
-}
-
+.prob-table td { padding:.65rem .7rem; border-bottom:1px solid #F3F4F6; color:#334155; }
+.prob-table tr:last-child td { border-bottom:none; }
 .prob-bar-wrap {
-    background: #E0E7FF;
-    border-radius: 8px;
-    height: 10px;
-    width: 140px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8px;
-    overflow: hidden;
+    background:#EDE9FE; border-radius:999px; height:8px;
+    width:120px; display:inline-block; vertical-align:middle; margin-right:6px;
 }
+.prob-bar-fill { border-radius:999px; height:8px; display:inline-block; }
 
-.prob-bar-fill {
-    border-radius: 8px;
-    height: 10px;
-    display: inline-block;
-    background: linear-gradient(90deg, #3B82F6, #6366F1);
-}
-
-/* ── Info box ── */
+/* ── template info box ── */
 .info-box {
-    background: var(--info-bg);
-    border: 1.5px solid var(--info-border);
-    border-radius: 14px;
-    padding: 1.3rem 1.5rem;
-    font-size: 0.88rem;
-    color: var(--info-text);
-    margin-bottom: 1.2rem;
-    line-height: 1.6;
+    background: #EEF2FF; border: 1px solid #C7D2FE;
+    border-radius: 16px; padding: 1.2rem 1.3rem;
+    font-size: .9rem; color: #3730A3; margin-bottom: 1.4rem;
 }
-
 .info-box code {
-    background: #3B82F6;
-    color: #fff;
-    border-radius: 6px;
-    padding: 0.2rem 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
+    background: #DBEAFE; border-radius: 6px;
+    padding: .18rem .45rem; font-family: 'DM Mono', monospace;
+    font-size: .85rem;
 }
 
-/* ── Error box ── */
+/* ── error box ── */
 .err-box {
-    background: var(--error-bg);
-    border: 1.5px solid var(--error-border);
-    border-radius: 14px;
-    padding: 1.3rem 1.5rem;
-    color: var(--error-text);
-    font-size: 0.9rem;
-    margin-bottom: 1.2rem;
-    font-weight: 500;
-    line-height: 1.6;
+    background:#FEF2F2; border:1px solid #FECACA;
+    border-radius:16px; padding:1.1rem 1.25rem;
+    color:#B91C1C; font-size:.9rem; margin-bottom:1rem;
 }
 
-/* ── Success box ── */
+/* ── success box ── */
 .ok-box {
-    background: var(--success-bg);
-    border: 1.5px solid var(--success-border);
-    border-radius: 14px;
-    padding: 1.3rem 1.5rem;
-    color: var(--success-text);
-    font-size: 0.9rem;
-    margin-bottom: 1.2rem;
-    font-weight: 500;
-    line-height: 1.6;
+    background:#F0FDF4; border:1px solid #BBF7D0;
+    border-radius:16px; padding:1.1rem 1.25rem;
+    color:#166534; font-size:.9rem; margin-bottom:1rem;
 }
 
-/* ── File uploader ── */
+/* ── file uploader ── */
 [data-testid="stFileUploader"] {
-    border: 2px dashed var(--uploader-border) !important;
+    border: 2px dashed #C7D2FE !important;
     border-radius: 16px !important;
-    background: var(--uploader-bg) !important;
-    padding: 2rem !important;
-}
-
-/* ── Input styling ── */
-.stNumberInput input, .stSelectbox select {
-    border-radius: 10px !important;
-    border: 1.5px solid var(--border) !important;
-    padding: 0.7rem 1rem !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.9rem !important;
-}
-
-.stNumberInput input:focus, .stSelectbox select:focus {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-}
-
-/* ── Scrollbar styling ── */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #F1F5F9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #CBD5E1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #94A3B8;
-}
-
-/* ── Responsive ── */
-@media (max-width: 640px) {
-    .rapiq-header {
-        padding: 2rem 1.5rem;
-    }
-    
-    .rapiq-header h1 {
-        font-size: 2rem;
-    }
-    
-    .stat-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .prob-table {
-        font-size: 0.75rem;
-    }
+    background: #F8F9FF !important;
+    padding: 1rem !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -601,26 +321,6 @@ def load_artifacts(model_path: str, scaler_path: str):
             errors.append(f"Gagal memuat scaler: {e}")
 
     return model, scaler, errors
-
-
-# ══════════════════════════════════════════════════════════════
-# SESSION STATE HELPERS
-# ══════════════════════════════════════════════════════════════
-def ensure_state():
-    if "active_page" not in st.session_state:
-        st.session_state.active_page = "single"
-    if "theme_mode" not in st.session_state:
-        st.session_state.theme_mode = "light"
-    if "single_result" not in st.session_state:
-        st.session_state.single_result = None
-
-
-def apply_theme():
-    theme = st.session_state.get("theme_mode", "light")
-    st.markdown(
-        f"<script>document.documentElement.setAttribute('data-theme', '{theme}');</script>",
-        unsafe_allow_html=True,
-    )
 
 
 # ══════════════════════════════════════════════════════════════
@@ -791,122 +491,91 @@ TEMPLATE_CSV = (
 # HALAMAN 1 — PREDIKSI TUNGGAL
 # ══════════════════════════════════════════════════════════════
 def page_single(model, scaler):
-    result_data = st.session_state.get("single_result")
+    st.markdown('<div class="section-card">'
+                '<div class="section-title">📋 Informasi Keluarga</div>',
+                unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
+    with c1:
+        edu_mother_lbl = st.selectbox("Pendidikan Ibu",  list(EDU_MAP_UI), key="s_edu_m")
+    with c2:
+        edu_father_lbl = st.selectbox("Pendidikan Ayah", list(EDU_MAP_UI), key="s_edu_f")
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    left, right = st.columns([1, 1.05])
+    st.markdown('<div class="section-card">'
+                '<div class="section-title">👶 Informasi Anak</div>',
+                unsafe_allow_html=True)
+    c3, c4 = st.columns(2)
+    with c3:
+        age = st.number_input("Usia Anak (tahun)", min_value=1, max_value=18,
+                              value=10, step=1, key="s_age")
+    with c4:
+        gender_lbl = st.selectbox("Jenis Kelamin", list(GENDER_MAP_UI), key="s_gender")
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    with left:
-        st.markdown('<div class="section-card">'
-                    '<div class="section-title">📋 Informasi Keluarga</div>',
-                    unsafe_allow_html=True)
-        c1, c2 = st.columns(2)
-        with c1:
-            edu_mother_lbl = st.selectbox("Pendidikan Ibu", list(EDU_MAP_UI), key="s_edu_m")
-        with c2:
-            edu_father_lbl = st.selectbox("Pendidikan Ayah", list(EDU_MAP_UI), key="s_edu_f")
-        st.markdown("</div>", unsafe_allow_html=True)
+    if st.button("🔍 Prediksi Kategori IQ", key="btn_single"):
+        edu_mother = EDU_MAP_UI[edu_mother_lbl]
+        edu_father = EDU_MAP_UI[edu_father_lbl]
+        gender     = GENDER_MAP_UI[gender_lbl]
 
-        st.markdown('<div class="section-card">'
-                    '<div class="section-title">👶 Informasi Anak</div>',
-                    unsafe_allow_html=True)
-        c3, c4 = st.columns(2)
-        with c3:
-            age = st.number_input("Usia Anak (tahun)", min_value=1, max_value=18,
-                                  value=10, step=1, key="s_age")
-        with c4:
-            gender_lbl = st.selectbox("Jenis Kelamin", list(GENDER_MAP_UI), key="s_gender")
-        st.markdown("</div>", unsafe_allow_html=True)
-
-        if st.button("🔍 Prediksi Kategori IQ", key="btn_single"):
-            edu_mother = EDU_MAP_UI[edu_mother_lbl]
-            edu_father = EDU_MAP_UI[edu_father_lbl]
-            gender     = GENDER_MAP_UI[gender_lbl]
-
-            try:
-                X = pd.DataFrame(
-                    [[edu_mother, edu_father, int(age), gender]],
-                    columns=REQUIRED_COLUMNS,
-                )
-                X_scaled   = scaler.transform(X)
-                pred_class = int(model.predict(X_scaled)[0])
-                proba      = model.predict_proba(X_scaled)[0]
-                confidence = float(proba.max()) * 100
-            except Exception as e:
-                st.markdown(f'<div class="err-box">⚠️ Prediksi gagal: {e}</div>',
-                            unsafe_allow_html=True)
-                return
-
-            st.session_state.single_result = {
-                "pred_class": pred_class,
-                "category": IQ_LABELS[pred_class],
-                "range": IQ_RANGES[pred_class],
-                "confidence": confidence,
-                "proba": proba.tolist(),
-            }
-            result_data = st.session_state.single_result
-
-    with right:
-        st.markdown('<div class="section-card">'
-                    '<div class="section-title">🎯 Hasil Prediksi</div>',
-                    unsafe_allow_html=True)
-
-        if result_data:
-            pred_class = result_data["pred_class"]
-            cat = result_data["category"]
-            rng = result_data["range"]
-            confidence = result_data["confidence"]
-            proba = np.array(result_data["proba"])
-            bg = IQ_COLORS[pred_class]
-
-            st.markdown(f"""
-            <div class="result-card" style="background:{bg};color:#fff;">
-                <div class="result-label">Hasil Prediksi</div>
-                <div class="result-category">{cat}</div>
-                <div class="result-range">Rentang IQ: {rng}</div>
-                <span class="result-confidence">Confidence: {confidence:.1f}%</span>
-            </div>
-            """, unsafe_allow_html=True)
-
-            st.markdown('<div style="margin-top:1.4rem;">', unsafe_allow_html=True)
-            st.plotly_chart(single_prob_chart(proba), width='stretch')
-            st.markdown('</div>', unsafe_allow_html=True)
-
-            rows = ""
-            for i in range(5):
-                pct = proba[i] * 100
-                w = int(pct * 1.2)
-                bold = "font-weight:700;color:var(--primary);" if i == pred_class else ""
-                fill = "var(--primary)" if i == pred_class else "#A5B4FC"
-                rows += f"""
-                <tr>
-                    <td style=\"{bold}\">Kelas {i}</td>
-                    <td style=\"{bold}\">{IQ_LABELS[i]}</td>
-                    <td style=\"{bold}\">{IQ_RANGES[i]}</td>
-                    <td>
-                        <span class=\"prob-bar-wrap\">
-                            <span class=\"prob-bar-fill\"
-                                  style=\"width:{w}px;background:{fill};\"></span>
-                        </span>
-                        <span style=\"{bold}\">{pct:.2f}%</span>
-                    </td>
-                </tr>"""
-
-            st.markdown(f"""
-            <table class="prob-table">
-              <thead><tr>
-                <th>Kelas</th><th>Kategori</th>
-                <th>Rentang IQ</th><th>Probabilitas</th>
-              </tr></thead>
-              <tbody>{rows}</tbody>
-            </table>
-            """, unsafe_allow_html=True)
-        else:
-            st.markdown(
-                '<div class="info-box">Masukkan data di kiri dan tekan tombol prediksi untuk melihat hasil di sini.</div>',
-                unsafe_allow_html=True,
+        try:
+            X = pd.DataFrame(
+                [[edu_mother, edu_father, int(age), gender]],
+                columns=REQUIRED_COLUMNS,
             )
+            X_scaled   = scaler.transform(X)
+            pred_class = int(model.predict(X_scaled)[0])
+            proba      = model.predict_proba(X_scaled)[0]
+            confidence = float(proba.max()) * 100
+        except Exception as e:
+            st.markdown(f'<div class="err-box">⚠️ Prediksi gagal: {e}</div>',
+                        unsafe_allow_html=True)
+            return
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        bg    = IQ_COLORS[pred_class]
+        cat   = IQ_LABELS[pred_class]
+        rng   = IQ_RANGES[pred_class]
+
+        st.markdown(f"""
+        <div class="result-card" style="background:{bg};color:#fff;">
+            <div class="result-label">Hasil Prediksi</div>
+            <div class="result-category">{cat}</div>
+            <div class="result-range">Rentang IQ: {rng}</div>
+            <span class="result-confidence">Confidence: {confidence:.1f}%</span>
+        </div>""", unsafe_allow_html=True)
+
+        st.markdown('<div class="section-card" style="margin-top:1.4rem;">'
+                    '<div class="section-title">📊 Probabilitas Seluruh Kelas</div>',
+                    unsafe_allow_html=True)
+        st.plotly_chart(single_prob_chart(proba), width='stretch')
+
+        rows = ""
+        for i in range(5):
+            pct   = proba[i] * 100
+            w     = int(pct * 1.2)
+            bold  = "font-weight:700;color:#4F46E5;" if i == pred_class else ""
+            fill  = "#4F46E5" if i == pred_class else "#A5B4FC"
+            rows += f"""
+            <tr>
+                <td style="{bold}">Kelas {i}</td>
+                <td style="{bold}">{IQ_LABELS[i]}</td>
+                <td style="{bold}">{IQ_RANGES[i]}</td>
+                <td>
+                    <span class="prob-bar-wrap">
+                        <span class="prob-bar-fill"
+                              style="width:{w}px;background:{fill};"></span>
+                    </span>
+                    <span style="{bold}">{pct:.2f}%</span>
+                </td>
+            </tr>"""
+
+        st.markdown(f"""
+        <table class="prob-table">
+          <thead><tr>
+            <th>Kelas</th><th>Kategori</th>
+            <th>Rentang IQ</th><th>Probabilitas</th>
+          </tr></thead>
+          <tbody>{rows}</tbody>
+        </table></div>""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════
@@ -916,26 +585,32 @@ def page_bulk(model, scaler):
 
     # ── Template download ──
     st.markdown('<div class="section-card">'
-                '<div class="section-title">📥 Download Template Dataset</div>',
+                '<div class="section-title">📥 Template dan Panduan Dataset</div>',
                 unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-        Unduh template CSV terlebih dahulu, isi data sesuai format, lalu upload kembali.<br><br>
-        Nilai yang diperbolehkan:<br>
-        &nbsp;• <code>education_mother / education_father</code>:
-        <code>primary or lower secondary</code> |
-        <code>vocational</code> | <code>secondary</code> | <code>higher</code><br>
-        &nbsp;• <code>gender</code>: <code>male</code> | <code>female</code><br>
-        &nbsp;• <code>age_years</code>: angka (1 – 18)
+        Unduh template CSV, lengkapi data sesuai format, kemudian upload kembali untuk melakukan prediksi. Data harus berisi kolom yang diperlukan agar model dapat memproses dengan benar.
     </div>
     """, unsafe_allow_html=True)
-    st.download_button(
-        label="⬇️ Download Template CSV",
-        data=TEMPLATE_CSV,
-        file_name="template_input_iq.csv",
-        mime="text/csv",
-        key="dl_template",
-    )
+
+    c1, c2 = st.columns([1, 1])
+    with c1:
+        st.download_button(
+            label="⬇️ Download Template CSV",
+            data=TEMPLATE_CSV,
+            file_name="template_input_iq.csv",
+            mime="text/csv",
+            key="dl_template",
+        )
+    with c2:
+        st.markdown("""
+        <div class="section-note">
+            Format nilai:
+            <br>• <code>education_mother / education_father</code>: <code>primary or lower secondary</code> | <code>vocational</code> | <code>secondary</code> | <code>higher</code>
+            <br>• <code>gender</code>: <code>male</code> | <code>female</code>
+            <br>• <code>age_years</code>: angka 1–18
+        </div>
+        """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
     # ── Upload ──
@@ -1064,35 +739,16 @@ def page_bulk(model, scaler):
 # MAIN
 # ══════════════════════════════════════════════════════════════
 def main():
-    ensure_state()
-    apply_theme()
-
     # header
     st.markdown("""
     <div class="rapiq-header">
-        <div class="rapiq-header-content">
-            <div class="logo">🧠</div>
-            <h1>RapIQ</h1>
-            <p>Sistem Prediksi Kategori IQ Berbasis Artificial Intelligence<br>
-            Menggunakan Multilayer Perceptron (MLP)</p>
-        </div>
+        <div class="logo">🧠</div>
+        <h1>RapIQ</h1>
+        <p>Sistem prediksi kategori IQ yang ringkas, akurat, dan mudah digunakan. Input data keluarga dan anak, lalu dapatkan kategori IQ dengan penjelasan hasil yang jelas.</p>
     </div>
     """, unsafe_allow_html=True)
 
-    # menu buttons
-    menu_col1, menu_col2, menu_col3 = st.columns([1.1, 1.1, 0.8])
-    with menu_col1:
-        if st.button("🔍 Prediksi Tunggal", key="menu_single"):
-            st.session_state.active_page = "single"
-    with menu_col2:
-        if st.button("📂 Pengujian Dataset", key="menu_bulk"):
-            st.session_state.active_page = "bulk"
-    with menu_col3:
-        theme_left, theme_right = st.columns(2)
-        if theme_left.button("☀️ Light", key="theme_light"):
-            st.session_state.theme_mode = "light"
-        if theme_right.button("🌙 Dark", key="theme_dark"):
-            st.session_state.theme_mode = "dark"
+    st.markdown('<div class="subheader">RapIQ dirancang untuk mendukung analisis cepat pada data individu dan dataset siswa. Halaman ini menyediakan antarmuka yang bersih, kontras tinggi, dan terstruktur agar pengguna mendapatkan pengalaman profesional.</div>', unsafe_allow_html=True)
 
     # load model
     model, scaler, errors = load_artifacts(MODEL_PATH, SCALER_PATH)
@@ -1102,9 +758,13 @@ def main():
                         unsafe_allow_html=True)
         return
 
-    if st.session_state.active_page == "single":
+    # navigasi tab
+    tab1, tab2 = st.tabs(["🔍 Prediksi Tunggal", "📂 Pengujian Dataset"])
+
+    with tab1:
         page_single(model, scaler)
-    else:
+
+    with tab2:
         page_bulk(model, scaler)
 
 
